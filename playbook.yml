@@ -1,0 +1,21 @@
+---
+- hosts: web
+  become: true
+  tasks:
+    - name: Instalar Apache
+      apt:
+        name: apache2
+        update_cache: yes
+        state: present
+
+    - name: Iniciar el servicio Apache
+      service:
+        name: apache2
+        state: started
+        enabled: yes
+
+    - name: Copiar archivos HTML
+      copy:
+        src: ./index.html
+        dest: /var/www/html/index.html
+
